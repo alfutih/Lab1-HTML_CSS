@@ -254,9 +254,12 @@ button{
     background-color: rgb(238, 50, 200);
     border-radius: 5px;
     padding: 10px;
-    
-    
 }
+.clearButton{
+    color: black;
+    background-color: transparent;
+}
+
 footer{
     text-align: center;
     color: #999;
