@@ -260,7 +260,7 @@ textarea {
   box-sizing: border-box;
 }
 
-.message {
+#message {
     height: 300px;
 }
 
