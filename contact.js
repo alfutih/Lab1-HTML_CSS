@@ -16,58 +16,39 @@ const submit= document.querySelector(".submitButton");
 
 const clear= document.querySelector(".clearButton");
 
+
+//Validation functions for name and message.
+function isNotEmpty (inputs){
+    return inputs.value.trim().length > 0;
+}
+
+function validateMessage(message){
+    return message.value.trim().length >= 20;
+}
+
 // The problem is when we click submit the browser 
 // sends the form, reloads the page and removes all
 // JS state. To stop the browser from reloading the page so I can validate the 
 // inputs with JS i should use: event.preventDefault();
+
 form.addEventListener("submit", function(event){
     event.preventDefault();
+    if(!isNotEmpty(firstName)){
+    console.log("The first name is empty");
+    }
+
+    //Implement last name validation function
+
+    if(!isNotEmpty(lastName)){
+        console.log("The last name is empty");
+    }
+
+    //Implement message validation function
+    // The validateMessage function checks if the message length is at least 20 characters and returns true or false. 
+    // If it’s false, I handle the error in the submit logic.”
+
+    if(!validateMessage(message)){
+    console.log("The message must be at least 20 characters.")
+    }
+
 });
-
-if(firstName.value.trim().length===0){
-    console.log("The first name is empty");
-}
-
-if(lastName.value.trim().length===0){
-    console.log("The first name is empty");
-}
-
-if(message.value.trim().length<20){
-    console.log("Your message is too short.");
-}
-
-/* form.addEventListener("click", function(){
-    console.log("test");
-}) */
-
-/* firstName.addEventListener("click", function(){
-    console.log("test");
-})
-
-lastName.addEventListener("click", function(){
-    console.log("test");
-})
-
-email.addEventListener("click", function(){
-    console.log("test");
-})
-
-phone.addEventListener("click", function(){
-    console.log("test");
-})
-
-subject.addEventListener("click", function(){
-    console.log("test");
-})
-
-message.addEventListener("click", function(){
-    console.log("test");
-})
-
-submit.addEventListener("click", function(){
-    console.log("test");
-})
-
-clear.addEventListener("click", function(){
-    console.log("test");
-}) */
