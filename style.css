@@ -292,6 +292,25 @@ main{
     padding-top: 50px;
 }
 
+.error-message{
+    color: #dc3545;
+    font-size: 0.85rem;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    margin-top: -20px;
+    margin-bottom: 18px;
+
+}
+
+.error-message.show {
+    opacity: 1;
+    
+}
+
+.input-error{
+    border-color: #dc3545 !important;
+}
+
 @media screen and (max-width: 1300px) {
     .image_big{
         display: flex;
