@@ -24,6 +24,18 @@ form.addEventListener("submit", function(event){
     event.preventDefault();
 });
 
+if(firstName.value.trim().length===0){
+    console.log("The first name is empty");
+}
+
+if(lastName.value.trim().length===0){
+    console.log("The first name is empty");
+}
+
+if(message.value.trim().length<20){
+    console.log("Your message is too short.");
+}
+
 /* form.addEventListener("click", function(){
     console.log("test");
 }) */
