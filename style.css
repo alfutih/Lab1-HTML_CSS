@@ -302,6 +302,10 @@ main{
 
 }
 
+select + .error-message {
+  margin-top: 8px;
+}
+
 .error-message.show {
     opacity: 1;
     

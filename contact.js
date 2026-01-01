@@ -26,20 +26,15 @@ function validateMessage(message){
     return message.value.trim().length >= 20;
 }
 
-function hasDot(emailInput){
-    return emailInput.value.trim().includes(".");
-}
-
-function hasAt(emailInput){
-    return emailInput.value.trim().includes("@");
-}
-
 function validateEmail(emailInput) {
   const value = emailInput.value.trim();
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailPattern.test(value);
 }
 
+function validateSubject(subject){
+    return(subject.value !=="");
+}
 //Create function for show error.
 
 function showError(input, message){
@@ -72,6 +67,7 @@ function clearError(input){
 
 form.addEventListener("submit", function(event){
     event.preventDefault();
+    //Implement first name validation function
     if(!isNotEmpty(firstName)){
     showError(firstName, "First name is required");
     }else{
@@ -94,6 +90,13 @@ form.addEventListener("submit", function(event){
         showError(email, "Please enter a valid email address");
     } else{
         clearError(email);
+    }
+
+    //subject validation
+    if(!validateSubject(subject)){
+        showError(subject, "Please choose a subject");
+    }else{
+        clearError(subject);
     }
 
     //Implement message validation function
@@ -144,6 +147,16 @@ email.addEventListener("input", function(){
 //To fix this issue I should use blur validation and touched.
 // I leave that to the future work.
 
+
+subject.addEventListener("change", function(){
+
+    if(!validateSubject(subject)){
+        showError(subject, "Please choose a subject");
+    }else{
+        clearError(subject);
+    }
+})
+    
 message.addEventListener("input", function(){
     if(!isNotEmpty(message)){
         showError(message, "Message is required");
