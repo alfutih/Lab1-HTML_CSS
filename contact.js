@@ -17,7 +17,7 @@ const submit= document.querySelector(".submitButton");
 const clear= document.querySelector(".clearButton");
 
 
-//Validation functions for name and message.
+//Validation functions for name, message and email.
 function isNotEmpty (input){
     return input.value.trim().length > 0;
 }
@@ -26,6 +26,19 @@ function validateMessage(message){
     return message.value.trim().length >= 20;
 }
 
+function hasDot(emailInput){
+    return emailInput.value.trim().includes(".");
+}
+
+function hasAt(emailInput){
+    return emailInput.value.trim().includes("@");
+}
+
+function validateEmail(emailInput) {
+  const value = emailInput.value.trim();
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(value);
+}
 
 //Create function for show error.
 
@@ -73,6 +86,16 @@ form.addEventListener("submit", function(event){
         clearError(lastName);
     }
 
+    //Implement validation email
+
+    if(!isNotEmpty(email)){
+        showError(email, "Email is required");
+    } else if(!validateEmail(email)){
+        showError(email, "Please enter a valid email address");
+    } else{
+        clearError(email);
+    }
+
     //Implement message validation function
     // The validateMessage function checks if the message length is at least 20 characters and returns true or false. 
     // If it’s false, I handle the error in the submit logic.”
@@ -105,6 +128,21 @@ lastName.addEventListener("input", function(){
         clearError(lastName);
     }
 })
+
+email.addEventListener("input", function(){
+     if(!isNotEmpty(email)){
+        showError(email, "Email is required");
+    } else if(!validateEmail(email)){
+        showError(email, "Please enter a valid email address");
+    } else{
+        clearError(email);
+    }
+})
+
+// According to UX consedration, that Error message should disappear 
+// when the user type on the same input and will appear only when the user leave inpot if the value is wrong.
+//To fix this issue I should use blur validation and touched.
+// I leave that to the future work.
 
 message.addEventListener("input", function(){
     if(!isNotEmpty(message)){
