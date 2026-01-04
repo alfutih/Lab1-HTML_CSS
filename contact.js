@@ -17,7 +17,7 @@ const messageCounter = document.getElementById("messageCounter");
 const successMessage = document.getElementById("successMessage");
 
 
-//Validation functions for name, message and email.
+//Validation functions for input, name, message, updating messsage, subject and email.
 function isNotEmpty (input){
     return input.value.trim().length > 0;
 }
@@ -70,6 +70,7 @@ function showError(input, message){
    errorP.classList.add("show");
    // Now we add red border class to input call "input-error" :
    input.classList.add("input-error");
+   input.classList.remove("input-valid");
 }
 
 // Create function for clear error
@@ -112,6 +113,7 @@ form.addEventListener("submit", function(event){
     }
     else{
         clearError(firstName);
+        firstName.classList.add("input-valid");
     }
 
     //Implement last name validation function
@@ -125,6 +127,7 @@ form.addEventListener("submit", function(event){
     }
     else{
         clearError(lastName);
+        lastName.classList.add("input-valid");
     }
 
     //Implement validation email
@@ -137,14 +140,20 @@ form.addEventListener("submit", function(event){
     isFormValid = false;
     } else{
         clearError(email);
+        email.classList.add("input-valid");
     }
 
     // Implement validation phone numbers
-    if(isNotEmpty(phone) && !validatePhone(phone)){
-        showError(phone, "Only numbers are allowed, optionally starting with +");
+    
+    if (!isNotEmpty(phone)) {
+    clearError(phone);
+    phone.classList.remove("input-valid");
+    } else if (!validatePhone(phone)) {
+    showError(phone, "Only numbers are allowed, optionally starting with +");
     isFormValid = false;
-    }else{
-        clearError(phone);
+    } else {
+    clearError(phone);
+    phone.classList.add("input-valid");
     }
 
     //subject validation
@@ -153,6 +162,7 @@ form.addEventListener("submit", function(event){
     isFormValid = false;
     }else{
         clearError(subject);
+        subject.classList.add("input-valid");
     }
 
     //Implement message validation function
@@ -168,6 +178,7 @@ form.addEventListener("submit", function(event){
     isFormValid = false;
     }else {
         clearError(message);
+        message.classList.add("input-valid");
     }
 
     // implement successful message, reset the form and clear the errors
@@ -178,6 +189,14 @@ form.addEventListener("submit", function(event){
 
         form.reset();
         updateMessageCounter();
+
+        // REMOVE green borders
+        firstName.classList.remove("input-valid");
+        lastName.classList.remove("input-valid");
+        email.classList.remove("input-valid");
+        phone.classList.remove("input-valid");
+        subject.classList.remove("input-valid");
+        message.classList.remove("input-valid");
 
         //Hide success message after 3 seconds
         setTimeout(function(){
@@ -271,5 +290,12 @@ form.addEventListener("reset", function () {
     clearError(phone);
     clearError(subject);
     clearError(message);
+
+    firstName.classList.remove("input-valid");
+    lastName.classList.remove("input-valid");
+    email.classList.remove("input-valid");
+    phone.classList.remove("input-valid");
+    subject.classList.remove("input-valid");
+    message.classList.remove("input-valid");
   }, 0);
 });

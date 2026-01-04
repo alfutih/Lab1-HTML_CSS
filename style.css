@@ -238,6 +238,10 @@ form {
     color: #999;
 }
 
+.input-valid {
+  border-color: #198754;
+}
+
 /* Style inputs + textarea */
 input, textarea {
     display: block;
@@ -246,18 +250,23 @@ input, textarea {
 }
 .option_field{
     display: block;
-    margin-bottom: 16px;
+    margin-bottom: 2px;
+
 }
 
-.option_field select,
+.option_field + select,
 input,
 textarea {
   display: block;
   width: 100%;
   padding: 8px;
-  border: 1px solid #999;
+  border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+select.input-valid {
+  border-color: #198754;
 }
 
 #message {
@@ -292,6 +301,13 @@ button{
   margin-bottom: 20px;
 }
 
+#subject {
+  color: #999;
+}
+
+#subject:valid {
+  color: black;
+}
 
 footer{
     text-align: center;
