@@ -14,16 +14,16 @@ const message= document.getElementById("message");
 
 const messageCounter = document.getElementById("messageCounter");
 
-const submit= document.querySelector(".submitButton");
-
-const clear= document.querySelector(".clearButton");
-
 const successMessage = document.getElementById("successMessage");
 
 
 //Validation functions for name, message and email.
 function isNotEmpty (input){
     return input.value.trim().length > 0;
+}
+
+function validateName(nameInput){
+  return /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/.test(nameInput.value.trim());
 }
 
 function validateMessage(message){
@@ -99,12 +99,18 @@ form.addEventListener("submit", function(event){
     //This helps me check if all fields are correct before showing the success message
     let isFormValid = true;
 
-    updateMessageCounter(); // always update counter
+    // always update counter
+    updateMessageCounter(); 
+
     //Implement first name validation function
     if(!isNotEmpty(firstName)){
     showError(firstName, "First name is required");
     isFormValid = false;
-    }else{
+    } else if(!validateName(firstName)){
+        showError(firstName, "Only letters allowed");
+        isFormValid = false;
+    }
+    else{
         clearError(firstName);
     }
 
@@ -112,8 +118,12 @@ form.addEventListener("submit", function(event){
 
     if(!isNotEmpty(lastName)){
         showError(lastName, "Last name is required");
-    isFormValid = false;
-    } else{
+        isFormValid = false;
+    } else if(!validateName(lastName)){
+        showError(lastName, "Only letters allowed");
+        isFormValid = false;
+    }
+    else{
         clearError(lastName);
     }
 
@@ -169,13 +179,6 @@ form.addEventListener("submit", function(event){
         form.reset();
         updateMessageCounter();
 
-        clearError(firstName);
-        clearError(lastName);
-        clearError(email);
-        clearError(phone);
-        clearError(subject);
-        clearError(message);
-
         //Hide success message after 3 seconds
         setTimeout(function(){
             successMessage.textContent= "";
@@ -188,28 +191,24 @@ form.addEventListener("submit", function(event){
 // I want errors to update while the user types not only when user click submit.
 
 firstName.addEventListener("input", function(){
-    if(!isNotEmpty(firstName)){
-        clearError(firstName);
-    } 
-    else if (!/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/.test(firstName.value)) {
+  if (!isNotEmpty(firstName)) {
+    clearError(firstName);
+  } else if (!validateName(firstName)) {
     showError(firstName, "Only letters allowed");
-    } 
-    else{
-        clearError(firstName);
-    }
-})
+  } else {
+    clearError(firstName);
+  }
+});
 
 lastName.addEventListener("input", function(){
-    if(!isNotEmpty(lastName)){
-        clearError(lastName);
-    }
-    else if (!/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/.test(lastName.value)) {
+  if (!isNotEmpty(lastName)) {
+    clearError(lastName);
+  } else if (!validateName(lastName)) {
     showError(lastName, "Only letters allowed");
-    } 
-    else{
-        clearError(lastName);
-    }
-})
+  } else {
+    clearError(lastName);
+  }
+});
 
 phone.addEventListener("input", function(){
     if(!isNotEmpty(phone)){
@@ -265,9 +264,9 @@ form.addEventListener("reset", function () {
   setTimeout(function () {
     updateMessageCounter();
 
-    // clear success
+    /* // clear success
     successMessage.textContent = "";
-    successMessage.classList.remove("show");
+    successMessage.classList.remove("show"); */
 
     // clear all field errors + red borders
     clearError(firstName);
